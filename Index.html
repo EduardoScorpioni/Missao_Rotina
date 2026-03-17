@@ -1,11 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<title>Missão Rotina - Fase 1</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <h1>teste</h1>
+
+<h1>Missão Rotina</h1>
+<h2>Fase 1 - Começar o Dia</h2>
+
+<p>Clique nas ações na ordem correta para ir à escola</p>
+
+<div id="acoes">
+
+<button onclick="selecionar('escovar')">Escovar os dentes</button>
+
+<button onclick="selecionar('levantar')">Levantar da cama</button>
+
+<button onclick="selecionar('mochila')">Arrumar mochila</button>
+
+<button onclick="selecionar('cama')">Arrumar a cama</button>
+
+<button onclick="selecionar('escola')">Ir para escola</button>
+
+<button onclick="selecionar('roupa')">Trocar de roupa</button>
+
+</div>
+
+<br>
+
+<button onclick="verificar()">Verificar Sequência</button>
+
+<h3 id="resultado"></h3>
+
+<script src="script.js"></script>
+
 </body>
 </html>
