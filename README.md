@@ -6,7 +6,7 @@
 
 ## 📸 Preview
 
-![Missão Rotina Preview](C:\Users\edusc\Desktop\git\Missão_Rotina\Missao_Rotina/image.png)
+![Missão Rotina Preview](Missao_Rotina/image.png)
 
 ---
 
