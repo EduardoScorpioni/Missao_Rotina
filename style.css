@@ -1,20 +1,585 @@
-body{
-    font-family: Arial;
-    text-align: center;
-    background-color: #f0f8ff;
+/* ============================================
+   MISSÃO ROTINA — style.css
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-#acoes{
-    margin-top: 30px;
+/* ---- VARIÁVEIS DE COR ---- */
+:root {
+  --azul:     #84E6F8;
+  --azul-dk:  #0AACCC;
+  --roxo:     #AE5ABF;
+  --roxo-lt:  #D8A8E8;
+  --verde:    #5BB751;
+  --verde-lt: #B0E3AC;
+  --vermelho: #C62A2A;
+  --verm-lt:  #F5A5A5;
+  --rosa:     #F29CA3;
+  --rosa-dk:  #D45E68;
+  --amarelo:  #F9E784;
+  --amar-dk:  #D4A800;
+  --laranja:  #F97B3A;
+  --branco:   #FFFFFF;
+  --bg:       #FEF9F0;
 }
 
-button{
-    padding: 15px;
-    margin: 10px;
-    font-size: 16px;
-    cursor: pointer;
+/* ---- BODY / FUNDO ---- */
+body {
+  font-family: 'Nunito', sans-serif;
+  background: #EDE0FF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
 }
 
-button:hover{
-    background-color: lightblue;
+/* ---- CONTAINER PRINCIPAL ---- */
+.game-root {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  width: 100%;
+  max-width: 860px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(174, 90, 191, 0.3);
+}
+
+/* ================================================
+   HEADER
+   ================================================ */
+.header {
+  background: linear-gradient(135deg, var(--roxo) 0%, #7B2FA0 100%);
+  padding: 16px 22px 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 16px rgba(174, 90, 191, 0.45);
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icon {
+  font-size: 40px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+.logo-text h1 {
+  color: var(--amarelo);
+  font-size: 26px;
+  font-weight: 900;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.logo-text p {
+  color: var(--rosa);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+/* Caixa de pontuação */
+.score-box {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-radius: 16px;
+  padding: 8px 18px;
+  text-align: center;
+}
+
+.score-box .label {
+  color: var(--amarelo);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.score-box .value {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.stars-row {
+  display: flex;
+  gap: 3px;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.star {
+  font-size: 16px;
+  opacity: 0.35;
+  transition: all 0.3s;
+}
+
+.star.on {
+  opacity: 1;
+  animation: pop 0.4s ease;
+}
+
+@keyframes pop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.5); }
+  100% { transform: scale(1); }
+}
+
+/* ================================================
+   NAVEGAÇÃO DE FASES
+   ================================================ */
+.phase-nav {
+  background: var(--roxo-lt);
+  padding: 9px 16px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  overflow-x: auto;
+  border-bottom: 3px solid var(--roxo);
+}
+
+.phase-btn {
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.65);
+  border: 2px solid rgba(174, 90, 191, 0.3);
+  border-radius: 22px;
+  padding: 7px 16px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--roxo);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.phase-btn:hover  { transform: scale(1.06); background: #fff; }
+
+.phase-btn.active {
+  background: var(--roxo);
+  color: #fff;
+  border-color: var(--roxo);
+  box-shadow: 0 3px 12px rgba(174, 90, 191, 0.5);
+}
+
+.phase-btn.done {
+  background: var(--verde);
+  color: #fff;
+  border-color: var(--verde);
+}
+
+.phase-btn.locked {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ================================================
+   ÁREA DO JOGO
+   ================================================ */
+.game-area {
+  display: flex;
+  height: 460px;
+}
+
+/* ---- PAINEL ESQUERDO (blocos) ---- */
+.left-panel {
+  width: 206px;
+  flex-shrink: 0;
+  background: #FDF0FF;
+  padding: 13px 10px;
+  border-right: 3px dashed var(--roxo-lt);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+}
+
+.panel-title {
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--roxo);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  background: var(--roxo-lt);
+  border-radius: 9px;
+  padding: 5px;
+  margin-bottom: 4px;
+}
+
+.block-card {
+  background: #fff;
+  border: 3px solid var(--azul);
+  border-radius: 14px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: grab;
+  transition: all 0.2s;
+  user-select: none;
+  box-shadow: 0 3px 8px rgba(132, 230, 248, 0.35);
+}
+
+.block-card:hover {
+  transform: scale(1.05) rotate(-1.5deg);
+  border-color: var(--roxo);
+  box-shadow: 0 6px 16px rgba(174, 90, 191, 0.3);
+}
+
+.block-card.dragging {
+  opacity: 0.35;
+  transform: scale(0.93);
+}
+
+.block-card.used {
+  opacity: 0.28;
+  pointer-events: none;
+  background: #f5f5f5;
+  border-color: #ddd;
+}
+
+.block-icon { font-size: 24px; flex-shrink: 0; }
+.block-name { font-size: 12px; font-weight: 800; color: #444; line-height: 1.25; }
+
+/* ---- PAINEL DIREITO (sequência) ---- */
+.right-panel {
+  flex: 1;
+  padding: 13px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+}
+
+/* Cabeçalho da missão */
+.mission-header {
+  border-radius: 16px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 3px solid rgba(0, 0, 0, 0.08);
+}
+
+.mission-header .big-icon { font-size: 40px; }
+
+.mission-header h2 {
+  font-size: 16px;
+  font-weight: 900;
+  color: #222;
+  line-height: 1.2;
+}
+
+.mission-header p {
+  font-size: 12px;
+  color: #555;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+/* Barra de progresso */
+.progress-bar-wrap {
+  height: 9px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.5s;
+}
+
+/* Botão de voz da missão */
+.speak-btn {
+  margin-left: auto;
+  background: #fff;
+  border: 3px solid var(--azul);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  font-size: 22px;
+  flex-shrink: 0;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(132, 230, 248, 0.4);
+}
+
+.speak-btn:hover {
+  transform: scale(1.18);
+  background: var(--azul);
+  border-color: var(--azul-dk);
+}
+
+.speak-btn.speaking {
+  animation: pulse-btn 0.5s infinite alternate;
+  background: var(--azul);
+}
+
+@keyframes pulse-btn {
+  from { transform: scale(1); }
+  to   { transform: scale(1.25); }
+}
+
+/* Título da sequência */
+.seq-title {
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--roxo);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ================================================
+   ZONA DE DROP (slots da sequência)
+   ================================================ */
+.drop-zone {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  flex: 1;
+  min-height: 200px;
+}
+
+.drop-slot {
+  background: rgba(249, 231, 132, 0.2);
+  border: 3px dashed var(--amarelo);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 78px;
+  transition: all 0.2s;
+  position: relative;
+  cursor: pointer;
+}
+
+.drop-slot:hover  { background: rgba(249, 231, 132, 0.45); border-color: var(--amar-dk); transform: scale(1.03); }
+.drop-slot.over   { background: rgba(132, 230, 248, 0.3);  border-color: var(--azul-dk); transform: scale(1.05); }
+
+.drop-slot.correct {
+  background: rgba(91, 183, 81, 0.18);
+  border-color: var(--verde);
+  border-style: solid;
+  animation: correct-flash 0.5s ease;
+}
+
+.drop-slot.wrong {
+  background: rgba(198, 42, 42, 0.12);
+  border-color: var(--vermelho);
+  border-style: solid;
+  animation: shake 0.4s ease;
+}
+
+@keyframes correct-flash {
+  0%   { background: rgba(91, 183, 81, 0.5); }
+  100% { background: rgba(91, 183, 81, 0.18); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-7px); }
+  75%      { transform: translateX(7px); }
+}
+
+.slot-number {
+  position: absolute;
+  top: 6px;
+  left: 9px;
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--amar-dk);
+}
+
+.slot-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.slot-icon  { font-size: 30px; }
+
+.slot-name {
+  font-size: 11px;
+  font-weight: 800;
+  color: #444;
+  text-align: center;
+  line-height: 1.2;
+  padding: 0 5px;
+}
+
+.slot-check {
+  font-size: 15px;
+  position: absolute;
+  top: 5px;
+  right: 7px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.correct .slot-check { opacity: 1; }
+
+/* ================================================
+   BARRA INFERIOR (botões)
+   ================================================ */
+.bottom-bar {
+  display: flex;
+  gap: 8px;
+  padding: 11px 15px;
+  background: #fff;
+  border-top: 3px dashed var(--roxo-lt);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.btn-action {
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-action:hover  { transform: translateY(-2px); }
+.btn-action:active { transform: scale(0.96); }
+
+.btn-check {
+  background: var(--verde);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(91, 183, 81, 0.45);
+  border: 2px solid #3A8C32;
+}
+
+.btn-hint {
+  background: var(--amarelo);
+  color: var(--amar-dk);
+  box-shadow: 0 4px 12px rgba(212, 168, 0, 0.35);
+  border: 2px solid var(--amar-dk);
+}
+
+.btn-reset {
+  background: var(--rosa);
+  color: var(--rosa-dk);
+  border: 2px solid var(--rosa-dk);
+}
+
+.btn-speak-all {
+  background: var(--azul);
+  color: var(--azul-dk);
+  box-shadow: 0 4px 12px rgba(10, 172, 204, 0.35);
+  border: 2px solid var(--azul-dk);
+}
+
+/* ================================================
+   TOAST DE FEEDBACK
+   ================================================ */
+.feedback-toast {
+  position: fixed;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100px);
+  padding: 13px 28px;
+  border-radius: 24px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 16px;
+  z-index: 9999;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.feedback-toast.show { transform: translateX(-50%) translateY(0); }
+
+.feedback-toast.ok  {
+  background: var(--verde);
+  color: #fff;
+  box-shadow: 0 8px 28px rgba(91, 183, 81, 0.5);
+}
+
+.feedback-toast.err {
+  background: var(--vermelho);
+  color: #fff;
+  box-shadow: 0 8px 28px rgba(198, 42, 42, 0.5);
+}
+
+.feedback-toast.tip {
+  background: var(--amarelo);
+  color: var(--amar-dk);
+  box-shadow: 0 8px 28px rgba(212, 168, 0, 0.4);
+}
+
+/* ================================================
+   PERSONAGEM / MASCOTE
+   ================================================ */
+.char-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.char {
+  font-size: 32px;
+  animation: wave 2.5s infinite;
+}
+
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  30%      { transform: rotate(-12deg); }
+  60%      { transform: rotate(12deg); }
+}
+
+.char-speech {
+  background: var(--amarelo);
+  border: 2px solid var(--amar-dk);
+  border-radius: 12px;
+  padding: 6px 11px;
+  font-size: 12px;
+  font-weight: 900;
+  color: #6B4A00;
+  max-width: 120px;
+  position: relative;
+}
+
+.char-speech::after {
+  content: '';
+  position: absolute;
+  right: -11px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-left-color: var(--amar-dk);
 }

@@ -1,41 +1,99 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Missão Rotina - Fase 1</title>
-<link rel="stylesheet" href="style.css">
-</head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Missão Rotina</title>
 
+  <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style.css" />
+</head>
 <body>
 
-<h1>Missão Rotina</h1>
-<h2>Fase 1 - Começar o Dia</h2>
+  <!-- Toast de feedback -->
+  <div class="feedback-toast" id="toast"></div>
 
-<p>Clique nas ações na ordem correta para ir à escola</p>
+  <!-- Container principal do jogo -->
+  <div class="game-root">
 
-<div id="acoes">
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+      <div class="logo-area">
+        <div class="logo-icon">🚀</div>
+        <div class="logo-text">
+          <h1>Missão Rotina</h1>
+          <p>Aprenda sequências</p>
+        </div>
+      </div>
+      <div class="score-box">
+        <div class="label">Pontos</div>
+        <div class="value" id="scoreVal">0</div>
+        <div class="stars-row">
+          <span class="star" id="s1">⭐</span>
+          <span class="star" id="s2">⭐</span>
+          <span class="star" id="s3">⭐</span>
+        </div>
+      </div>
+    </div>
 
-<button onclick="selecionar('escovar')">Escovar os dentes</button>
+    <!-- ===== NAVEGAÇÃO DE FASES ===== -->
+    <div class="phase-nav" id="phaseNav"></div>
 
-<button onclick="selecionar('levantar')">Levantar da cama</button>
+    <!-- ===== ÁREA DO JOGO ===== -->
+    <div class="game-area">
 
-<button onclick="selecionar('mochila')">Arrumar mochila</button>
+      <!-- Painel Esquerdo: blocos arrastáveis -->
+      <div class="left-panel">
+        <div class="panel-title">🎴 Blocos</div>
+        <div id="blockList"></div>
+      </div>
 
-<button onclick="selecionar('cama')">Arrumar a cama</button>
+      <!-- Painel Direito: missão + sequência -->
+      <div class="right-panel">
 
-<button onclick="selecionar('escola')">Ir para escola</button>
+        <!-- Cabeçalho da missão -->
+        <div class="mission-header" id="missionHeader">
+          <div class="big-icon" id="missionIcon">🌅</div>
+          <div style="flex:1">
+            <h2 id="missionTitle">Fase 1 — Começar o Dia!</h2>
+            <p id="missionDesc">Arraste os blocos na ordem certa para ir à escola</p>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+            </div>
+          </div>
+          <button class="speak-btn" id="speakMissionBtn" onclick="speakMission()" title="Ouvir a missão">
+            🔊
+          </button>
+        </div>
 
-<button onclick="selecionar('roupa')">Trocar de roupa</button>
+        <!-- Título da sequência -->
+        <div class="seq-title">📋 Monte a sequência:</div>
 
-</div>
+        <!-- Zona de drop -->
+        <div class="drop-zone" id="dropZone"></div>
 
-<br>
+      </div>
+    </div>
 
-<button onclick="verificar()">Verificar Sequência</button>
+    <!-- ===== BARRA INFERIOR ===== -->
+    <div class="bottom-bar">
+      <button class="btn-action btn-speak-all" onclick="speakSequence()">🎧 Ouvir</button>
+      <button class="btn-action btn-hint"      onclick="showHint()">💡 Dica</button>
+      <button class="btn-action btn-reset"     onclick="resetPhase()">🔄 Recomeçar</button>
+      <button class="btn-action btn-check"     onclick="checkAnswer()">✅ Verificar!</button>
+      <div class="char-wrap">
+        <div class="char-speech" id="charSpeech">Vamos lá!</div>
+        <div class="char">🧒</div>
+      </div>
+    </div>
 
-<h3 id="resultado"></h3>
+  </div><!-- fim .game-root -->
 
-<script src="script.js"></script>
+  <!-- Lógica do jogo -->
+  <script src="game.js"></script>
 
 </body>
 </html>
