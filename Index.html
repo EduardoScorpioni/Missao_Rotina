@@ -11,6 +11,24 @@
 
   <div class="feedback-toast" id="toast"></div>
 
+  <!-- TELA DE CONCLUSÃO DE FASE -->
+  <div class="phase-complete-overlay" id="phaseCompleteOverlay">
+    <div class="phase-complete-card">
+      <div class="pc-phase-icon" id="pcPhaseIcon">🌅</div>
+      <h2 class="pc-title" id="pcTitle">Fase Concluída!</h2>
+      <div class="pc-stars-wrap" id="pcStarsWrap">
+        <!-- estrelas animadas inseridas pelo JS -->
+      </div>
+      <div class="pc-score-line" id="pcScoreLine">+20 pontos</div>
+      <div class="pc-details" id="pcDetails">
+        <!-- detalhes de bônus e penalidades -->
+      </div>
+      <button class="pc-btn-next" id="pcBtnNext" onclick="advancePhase()">
+        Próxima Fase ➡️
+      </button>
+    </div>
+  </div>
+
   <div class="game-root">
 
     <!-- HEADER -->
@@ -25,10 +43,8 @@
       <div class="score-box">
         <div class="label">Pontos</div>
         <div class="value" id="scoreVal">0</div>
-        <div class="stars-row">
-          <span class="star" id="s1">⭐</span>
-          <span class="star" id="s2">⭐</span>
-          <span class="star" id="s3">⭐</span>
+        <div class="stars-row" id="starsRow">
+          <!-- estrelas geradas dinamicamente pelo JS -->
         </div>
       </div>
     </div>
@@ -39,10 +55,16 @@
     <!-- JOGO -->
     <div class="game-area">
 
-      <!-- Painel esquerdo: blocos -->
-      <div class="left-panel">
-        <div class="panel-title">🎴 Blocos</div>
-        <div id="blockList"></div>
+      <!-- Painel esquerdo: botões de ação -->
+      <div class="left-panel actions-panel">
+        <div class="char-wrap char-wrap-vertical">
+          <div class="char">🧒</div>
+          <div class="char-speech char-speech-vertical" id="charSpeech">Vamos lá!</div>
+        </div>
+        <button class="btn-action btn-check"     onclick="checkAnswer()">✅ Verificar!</button>
+        <button class="btn-action btn-speak-all" onclick="speakSequence()">🎧 Ouvir</button>
+        <button class="btn-action btn-hint"      onclick="showHint()">💡 Dica</button>
+        <button class="btn-action btn-reset"     onclick="resetPhase()">🔄 Recomeçar</button>
       </div>
 
       <!-- Painel direito: missão + sequência -->
@@ -65,16 +87,10 @@
 
     </div>
 
-    <!-- BARRA INFERIOR -->
-    <div class="bottom-bar">
-      <button class="btn-action btn-speak-all" onclick="speakSequence()">🎧 Ouvir</button>
-      <button class="btn-action btn-hint"      onclick="showHint()">💡 Dica</button>
-      <button class="btn-action btn-reset"     onclick="resetPhase()">🔄 Recomeçar</button>
-      <button class="btn-action btn-check"     onclick="checkAnswer()">✅ Verificar!</button>
-      <div class="char-wrap">
-        <div class="char-speech" id="charSpeech">Vamos lá!</div>
-        <div class="char">🧒</div>
-      </div>
+    <!-- PAINEL INFERIOR: blocos -->
+    <div class="bottom-blocks-panel">
+      <div class="panel-title">🎴 Blocos</div>
+      <div id="blockList"></div>
     </div>
 
   </div>
