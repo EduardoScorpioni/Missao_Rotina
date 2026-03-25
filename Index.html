@@ -4,22 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Missão Rotina</title>
-
-  <!-- Fonte -->
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet" />
-
-  <!-- Estilos -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Toast de feedback -->
   <div class="feedback-toast" id="toast"></div>
 
-  <!-- Container principal do jogo -->
   <div class="game-root">
 
-    <!-- ===== HEADER ===== -->
+    <!-- HEADER -->
     <div class="header">
       <div class="logo-area">
         <div class="logo-icon">🚀</div>
@@ -39,22 +33,20 @@
       </div>
     </div>
 
-    <!-- ===== NAVEGAÇÃO DE FASES ===== -->
+    <!-- FASES -->
     <div class="phase-nav" id="phaseNav"></div>
 
-    <!-- ===== ÁREA DO JOGO ===== -->
+    <!-- JOGO -->
     <div class="game-area">
 
-      <!-- Painel Esquerdo: blocos arrastáveis -->
+      <!-- Painel esquerdo: blocos -->
       <div class="left-panel">
         <div class="panel-title">🎴 Blocos</div>
         <div id="blockList"></div>
       </div>
 
-      <!-- Painel Direito: missão + sequência -->
+      <!-- Painel direito: missão + sequência -->
       <div class="right-panel">
-
-        <!-- Cabeçalho da missão -->
         <div class="mission-header" id="missionHeader">
           <div class="big-icon" id="missionIcon">🌅</div>
           <div style="flex:1">
@@ -64,21 +56,16 @@
               <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
             </div>
           </div>
-          <button class="speak-btn" id="speakMissionBtn" onclick="speakMission()" title="Ouvir a missão">
-            🔊
-          </button>
+          <button class="speak-btn" id="speakMissionBtn" onclick="speakMission()" title="Ouvir a missão">🔊</button>
         </div>
 
-        <!-- Título da sequência -->
         <div class="seq-title">📋 Monte a sequência:</div>
-
-        <!-- Zona de drop -->
         <div class="drop-zone" id="dropZone"></div>
-
       </div>
+
     </div>
 
-    <!-- ===== BARRA INFERIOR ===== -->
+    <!-- BARRA INFERIOR -->
     <div class="bottom-bar">
       <button class="btn-action btn-speak-all" onclick="speakSequence()">🎧 Ouvir</button>
       <button class="btn-action btn-hint"      onclick="showHint()">💡 Dica</button>
@@ -90,10 +77,8 @@
       </div>
     </div>
 
-  </div><!-- fim .game-root -->
+  </div>
 
-  <!-- Lógica do jogo -->
   <script src="game.js"></script>
-
 </body>
 </html>

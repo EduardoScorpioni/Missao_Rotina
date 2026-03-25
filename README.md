@@ -1,4 +1,4 @@
-# 🚀 Missão Rotina
+# 🚀 Missão Rotina teste
 
 > Jogo educativo interativo para crianças do 1º e 2º ano do Ensino Fundamental, desenvolvido para introduzir conceitos de **lógica de programação** e **pensamento computacional** por meio de atividades da rotina diária.
 

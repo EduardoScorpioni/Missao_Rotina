@@ -3,9 +3,20 @@
    ============================================ */
 
 // ================================================
+// CAMINHO BASE DAS IMAGENS
+// ================================================
+const IMG = 'assets/';
+
+// ================================================
 // DADOS DAS FASES
+// img: nome do arquivo da imagem (em assets/imagens/)
+// img: '' = ainda sem imagem, usa o emoji como fallback
 // ================================================
 const phases = [
+
+  // ============================================================
+  // FASE 1 — COMEÇAR O DIA ✅ imagens parcialmente prontas
+  // ============================================================
   {
     id: 1,
     icon: '🌅',
@@ -15,15 +26,19 @@ const phases = [
     desc: 'Arraste os blocos na ordem certa para ir à escola',
     mission: 'Hora de começar o dia! Coloque as ações na ordem correta para ir à escola.',
     blocks: [
-      { id: 'lb', name: 'Levantar da cama',  icon: '🛏️' },
-      { id: 'ab', name: 'Arrumar a cama',    icon: '🛋️' },
-      { id: 'tr', name: 'Trocar de roupa',   icon: '👕' },
-      { id: 'es', name: 'Escovar os dentes', icon: '🪥' },
-      { id: 'mo', name: 'Arrumar a mochila', icon: '🎒' },
-      { id: 'ir', name: 'Ir para a escola',  icon: '🏫' }
+      { id: 'lb', name: 'Levantar da cama',  icon: '🛏️', img: 'Fundo.png' },
+      { id: 'ab', name: 'Arrumar a cama',    icon: '🛋️', img: 'Designer.png' },
+      { id: 'tr', name: 'Trocar de roupa',   icon: '👕', img: 'Designer (1).png' },
+      { id: 'es', name: 'Escovar os dentes', icon: '🪥', img: 'Designer (2).png' },
+      { id: 'mo', name: 'Arrumar a mochila', icon: '🎒', img: 'Designer (4).png' },
+      { id: 'ir', name: 'Ir para a escola',  icon: '🏫', img: 'Designer (5).png' }
     ],
     sequence: ['lb', 'ab', 'tr', 'es', 'mo', 'ir']
   },
+
+  // ============================================================
+  // FASE 2 — TAREFA DE CASA ⏳ aguardando imagens
+  // ============================================================
   {
     id: 2,
     icon: '📚',
@@ -33,15 +48,19 @@ const phases = [
     desc: 'Organize as etapas para fazer sua lição',
     mission: 'Hora da lição! Organize as etapas para fazer a tarefa de casa.',
     blocks: [
-      { id: 'am', name: 'Arrumar o material',  icon: '📦' },
-      { id: 'om', name: 'Organizar a mesa',     icon: '🪑' },
-      { id: 'ac', name: 'Abrir o caderno',      icon: '📖' },
-      { id: 'ra', name: 'Resolver a atividade', icon: '✏️' },
-      { id: 'ft', name: 'Finalizar a tarefa',   icon: '✅' },
-      { id: 'gm', name: 'Guardar os materiais', icon: '🎒' }
+      { id: 'am', name: 'Arrumar o material',  icon: '📦', img: '' },  // fase2_01_arrumar_material.png
+      { id: 'om', name: 'Organizar a mesa',    icon: '🪑', img: '' },  // fase2_02_organizar_mesa.png
+      { id: 'ac', name: 'Abrir o caderno',     icon: '📖', img: '' },  // fase2_03_abrir_caderno.png
+      { id: 'ra', name: 'Resolver a atividade',icon: '✏️', img: '' },  // fase2_04_resolver_atividade.png
+      { id: 'ft', name: 'Finalizar a tarefa',  icon: '✅', img: '' },  // fase2_05_finalizar_tarefa.png
+      { id: 'gm', name: 'Guardar os materiais',icon: '🎒', img: '' }   // fase2_06_guardar_materiais.png
     ],
     sequence: ['am', 'om', 'ac', 'ra', 'ft', 'gm']
   },
+
+  // ============================================================
+  // FASE 3 — HORA DE BRINCAR ⏳ aguardando imagens
+  // ============================================================
   {
     id: 3,
     icon: '🎮',
@@ -51,15 +70,19 @@ const phases = [
     desc: 'Organize o momento de brincar e guardar os brinquedos',
     mission: 'Vamos brincar! Mas primeiro organize as etapas certinho.',
     blocks: [
-      { id: 'pb', name: 'Pegar a caixa',        icon: '📦' },
-      { id: 'cb', name: 'Escolher brinquedos',  icon: '🧸' },
-      { id: 'br', name: 'Brincar',              icon: '🎮' },
-      { id: 'db', name: 'Dividir com amigos',   icon: '🤝' },
-      { id: 'ob', name: 'Organizar brinquedos', icon: '🗂️' },
-      { id: 'gb', name: 'Guardar na caixa',     icon: '📫' }
+      { id: 'pb', name: 'Pegar a caixa',        icon: '📦', img: '' },  // fase3_01_pegar_caixa.png
+      { id: 'cb', name: 'Escolher brinquedos',  icon: '🧸', img: '' },  // fase3_02_escolher_brinquedos.png
+      { id: 'br', name: 'Brincar',              icon: '🎮', img: '' },  // fase3_03_brincar.png
+      { id: 'db', name: 'Dividir com amigos',   icon: '🤝', img: '' },  // fase3_04_dividir_amigos.png
+      { id: 'ob', name: 'Organizar brinquedos', icon: '🗂️', img: '' },  // fase3_05_organizar_brinquedos.png
+      { id: 'gb', name: 'Guardar na caixa',     icon: '📫', img: '' }   // fase3_06_guardar_caixa.png
     ],
     sequence: ['pb', 'cb', 'br', 'db', 'ob', 'gb']
   },
+
+  // ============================================================
+  // FASE 4 — HORA DO LANCHE ⏳ aguardando imagens
+  // ============================================================
   {
     id: 4,
     icon: '🥪',
@@ -69,17 +92,21 @@ const phases = [
     desc: 'Monte seu sanduíche passo a passo',
     mission: 'Que fome! Vamos fazer um sanduíche gostoso. Siga a sequência!',
     blocks: [
-      { id: 'ic',  name: 'Ir à cozinha',        icon: '🚶' },
-      { id: 'si',  name: 'Separar ingredientes', icon: '🥗' },
-      { id: 'pp',  name: 'Pegar um prato',       icon: '🍽️' },
-      { id: 'pa',  name: 'Pegar o pão',          icon: '🍞' },
-      { id: 'cp',  name: 'Pão no prato',         icon: '🥖' },
-      { id: 'mon', name: 'Montar o sanduíche',   icon: '🥪' },
-      { id: 'sm',  name: 'Sentar à mesa',        icon: '🪑' },
-      { id: 'co',  name: 'Comer o lanche',       icon: '😋' }
+      { id: 'ic',  name: 'Ir à cozinha',        icon: '🚶', img: '' },  // fase4_01_ir_cozinha.png
+      { id: 'si',  name: 'Separar ingredientes', icon: '🥗', img: '' },  // fase4_02_separar_ingredientes.png
+      { id: 'pp',  name: 'Pegar um prato',       icon: '🍽️', img: '' },  // fase4_03_pegar_prato.png
+      { id: 'pa',  name: 'Pegar o pão',          icon: '🍞', img: '' },  // fase4_04_pegar_pao.png
+      { id: 'cp',  name: 'Pão no prato',         icon: '🥖', img: '' },  // fase4_05_pao_no_prato.png
+      { id: 'mon', name: 'Montar o sanduíche',   icon: '🥪', img: '' },  // fase4_06_montar_sanduiche.png
+      { id: 'sm',  name: 'Sentar à mesa',        icon: '🪑', img: '' },  // fase4_07_sentar_mesa.png
+      { id: 'co',  name: 'Comer o lanche',       icon: '😋', img: '' }   // fase4_08_comer_lanche.png
     ],
     sequence: ['ic', 'si', 'pp', 'pa', 'cp', 'mon', 'sm', 'co']
   },
+
+  // ============================================================
+  // FASE 5 — COMPUTAÇÃO ⏳ aguardando imagens
+  // ============================================================
   {
     id: 5,
     icon: '💻',
@@ -89,11 +116,11 @@ const phases = [
     desc: 'Organize as etapas para enviar um arquivo pelo computador',
     mission: 'Vamos aprender computação! Organize as etapas para enviar um arquivo.',
     blocks: [
-      { id: 'ca', name: 'Criar o arquivo',      icon: '📄' },
-      { id: 'sa', name: 'Salvar o arquivo',     icon: '💾' },
-      { id: 'ei', name: 'Enviar pela internet', icon: '📤' },
-      { id: 'sr', name: 'Servidor receber',     icon: '🖥️' },
-      { id: 'ga', name: 'Guardar no sistema',   icon: '🗄️' }
+      { id: 'ca', name: 'Criar o arquivo',      icon: '📄', img: '' },  // fase5_01_criar_arquivo.png
+      { id: 'sa', name: 'Salvar o arquivo',     icon: '💾', img: '' },  // fase5_02_salvar_arquivo.png
+      { id: 'ei', name: 'Enviar pela internet', icon: '📤', img: '' },  // fase5_03_enviar_internet.png
+      { id: 'sr', name: 'Servidor receber',     icon: '🖥️', img: '' },  // fase5_04_servidor_receber.png
+      { id: 'ga', name: 'Guardar no sistema',   icon: '🗄️', img: '' }   // fase5_05_guardar_sistema.png
     ],
     sequence: ['ca', 'sa', 'ei', 'sr', 'ga']
   }
@@ -109,23 +136,37 @@ let phaseScores  = [0, 0, 0, 0, 0];
 let dragItem     = null;
 let hintCount    = 0;
 
-// ================================================
-// MENSAGENS DE FEEDBACK
-// ================================================
 const sayings = {
-  correct: [
-    'Incrível! Você acertou! 🎉',
-    'Muito bem! Continue assim! 🌟',
-    'Que esperto! 🏆',
-    'Perfeito! Você arrasou! ✨',
-    'Show de bola! 🎊'
-  ],
-  wrong: [
-    'Quase! Tenta de novo! 💪',
-    'Não foi dessa vez! Você consegue! 🙂',
-    'Pense bem... qual vem primeiro? 🤔'
-  ]
+  correct: ['Incrível! Você acertou! 🎉','Muito bem! Continue assim! 🌟','Que esperto! 🏆','Perfeito! Você arrasou! ✨','Show de bola! 🎊'],
+  wrong:   ['Quase! Tenta de novo! 💪','Não foi dessa vez! Você consegue! 🙂','Pense bem... qual vem primeiro? 🤔']
 };
+
+// ================================================
+// RENDERIZAR CONTEÚDO — imagem ou emoji fallback
+// ================================================
+function renderBlockContent(b) {
+  if (b.img) {
+    return `
+      <div class="block-img-wrap">
+        <img src="${IMG}${b.img}" alt="${b.name}" class="block-img"
+          onerror="this.parentElement.outerHTML='<span class=\\'block-icon\\'>${b.icon}</span>'" />
+      </div>
+      <span class="block-name">${b.name}</span>`;
+  }
+  return `<span class="block-icon">${b.icon}</span><span class="block-name">${b.name}</span>`;
+}
+
+function renderSlotContent(b) {
+  if (b.img) {
+    return `
+      <div class="slot-img-wrap">
+        <img src="${IMG}${b.img}" alt="${b.name}" class="slot-img"
+          onerror="this.parentElement.outerHTML='<span class=\\'slot-icon\\'>${b.icon}</span>'" />
+      </div>
+      <span class="slot-name">${b.name}</span>`;
+  }
+  return `<span class="slot-icon">${b.icon}</span><span class="slot-name">${b.name}</span>`;
+}
 
 // ================================================
 // ÁUDIO — WEB SPEECH API
@@ -134,9 +175,7 @@ function say(text, speed = 0.9) {
   if (!window.speechSynthesis) return null;
   window.speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
-  u.lang  = 'pt-BR';
-  u.rate  = speed;
-  u.pitch = 1.2;
+  u.lang = 'pt-BR'; u.rate = speed; u.pitch = 1.2;
   const ptVoice = window.speechSynthesis.getVoices().find(v => v.lang.startsWith('pt'));
   if (ptVoice) u.voice = ptVoice;
   window.speechSynthesis.speak(u);
@@ -155,25 +194,21 @@ function speakSequence() {
   const ph = phases[currentPhase];
   const filled = slots.filter(s => s !== null);
   if (!filled.length) { say('Adicione os blocos primeiro!'); return; }
-  const names = slots
-    .map((s, i) => s ? `${i + 1}. ${ph.blocks.find(b => b.id === s).name}` : '')
-    .filter(Boolean);
+  const names = slots.map((s, i) => s ? `${i+1}. ${ph.blocks.find(b => b.id === s).name}` : '').filter(Boolean);
   say('A sequência até agora é: ' + names.join(', '), 0.8);
 }
 
 // ================================================
-// FEEDBACK VISUAL (toast + personagem)
+// FEEDBACK VISUAL
 // ================================================
 function showToast(msg, type = 'ok') {
   const t = document.getElementById('toast');
   t.textContent = msg;
-  t.className   = 'feedback-toast show ' + type;
+  t.className = 'feedback-toast show ' + type;
   setTimeout(() => { t.className = 'feedback-toast'; }, 2600);
 }
 
-function setChar(msg) {
-  document.getElementById('charSpeech').textContent = msg;
-}
+function setChar(msg) { document.getElementById('charSpeech').textContent = msg; }
 
 // ================================================
 // NAVEGAÇÃO DE FASES
@@ -184,16 +219,13 @@ function buildPhaseNav() {
   phases.forEach((ph, i) => {
     const btn = document.createElement('button');
     let cls = 'phase-btn';
-    if (i === currentPhase)    cls += ' active';
+    if (i === currentPhase)      cls += ' active';
     else if (phaseScores[i] > 0) cls += ' done';
-    else if (i > currentPhase) cls += ' locked';
+    else if (i > currentPhase)   cls += ' locked';
     btn.className = cls;
     btn.innerHTML = ph.icon + ' Fase ' + ph.id;
     btn.onclick = () => {
-      if (i <= currentPhase || phaseScores[i] > 0) {
-        currentPhase = i;
-        initPhase();
-      }
+      if (i <= currentPhase || phaseScores[i] > 0) { currentPhase = i; initPhase(); }
     };
     nav.appendChild(btn);
   });
@@ -204,15 +236,13 @@ function buildPhaseNav() {
 // ================================================
 function initPhase() {
   const ph = phases[currentPhase];
-  slots     = new Array(ph.sequence.length).fill(null);
+  slots = new Array(ph.sequence.length).fill(null);
   hintCount = 0;
-
-  document.getElementById('missionIcon').textContent         = ph.icon;
-  document.getElementById('missionTitle').textContent        = `Fase ${ph.id} — ${ph.title}`;
-  document.getElementById('missionDesc').textContent         = ph.desc;
-  document.getElementById('missionHeader').style.background  = ph.bg;
-  document.getElementById('progressFill').style.background   = ph.pbColor;
-
+  document.getElementById('missionIcon').textContent        = ph.icon;
+  document.getElementById('missionTitle').textContent       = `Fase ${ph.id} — ${ph.title}`;
+  document.getElementById('missionDesc').textContent        = ph.desc;
+  document.getElementById('missionHeader').style.background = ph.bg;
+  document.getElementById('progressFill').style.background  = ph.pbColor;
   updateProgress();
   buildPhaseNav();
   buildBlocks();
@@ -222,21 +252,18 @@ function initPhase() {
 }
 
 // ================================================
-// CONSTRUIR BLOCOS (painel esquerdo)
+// CONSTRUIR BLOCOS
 // ================================================
 function buildBlocks() {
   const ph   = phases[currentPhase];
   const list = document.getElementById('blockList');
   list.innerHTML = '';
-
-  // embaralhar
   [...ph.blocks].sort(() => Math.random() - 0.5).forEach(b => {
     const c = document.createElement('div');
-    c.className  = 'block-card';
-    c.id         = 'blk_' + b.id;
-    c.draggable  = true;
-    c.innerHTML  = `<span class="block-icon">${b.icon}</span><span class="block-name">${b.name}</span>`;
-
+    c.className = 'block-card' + (b.img ? ' has-img' : '');
+    c.id        = 'blk_' + b.id;
+    c.draggable = true;
+    c.innerHTML = renderBlockContent(b);
     c.addEventListener('dragstart', () => { dragItem = b.id; c.classList.add('dragging'); });
     c.addEventListener('dragend',   () => c.classList.remove('dragging'));
     c.addEventListener('click', () => {
@@ -244,65 +271,45 @@ function buildBlocks() {
       const next = slots.findIndex(s => s === null);
       if (next !== -1) addToSlot(next, b.id);
     });
-
     list.appendChild(c);
   });
 }
 
 // ================================================
-// CONSTRUIR SLOTS (zona de drop)
+// CONSTRUIR SLOTS
 // ================================================
 function buildSlots() {
   const ph   = phases[currentPhase];
   const zone = document.getElementById('dropZone');
   zone.innerHTML = '';
-
   ph.sequence.forEach((_, i) => {
     const s = document.createElement('div');
-    s.className    = 'drop-slot';
-    s.dataset.idx  = i;
-    s.innerHTML    = `
+    s.className   = 'drop-slot';
+    s.dataset.idx = i;
+    s.innerHTML   = `
       <span class="slot-number">${i + 1}</span>
-      <div class="slot-content" id="sc${i}">
-        <span style="font-size:28px;color:#ccc">?</span>
-      </div>
-      <span class="slot-check">✅</span>
-    `;
-
+      <div class="slot-content" id="sc${i}"><span style="font-size:26px;color:#ccc">?</span></div>
+      <span class="slot-check">✅</span>`;
     s.addEventListener('dragover',  e => { e.preventDefault(); s.classList.add('over'); });
     s.addEventListener('dragleave', () => s.classList.remove('over'));
-    s.addEventListener('drop', e => {
-      e.preventDefault();
-      s.classList.remove('over');
-      if (dragItem) addToSlot(i, dragItem);
-    });
+    s.addEventListener('drop', e => { e.preventDefault(); s.classList.remove('over'); if (dragItem) addToSlot(i, dragItem); });
     s.addEventListener('click', () => { if (slots[i]) removeFromSlot(i); });
-
     zone.appendChild(s);
   });
 }
 
 // ================================================
-// ADICIONAR / REMOVER BLOCO DE SLOT
+// ADICIONAR / REMOVER BLOCO
 // ================================================
 function addToSlot(idx, blockId) {
   const ph = phases[currentPhase];
-
-  // Libera o slot ocupado, se houver
   if (slots[idx] !== null) removeFromSlot(idx);
-
-  // Remove o bloco de outro slot se já estava posicionado
   if (slots.includes(blockId)) removeFromSlot(slots.indexOf(blockId));
-
   slots[idx] = blockId;
   const b = ph.blocks.find(x => x.id === blockId);
-
-  document.getElementById('sc' + idx).innerHTML =
-    `<span class="slot-icon">${b.icon}</span><span class="slot-name">${b.name}</span>`;
-
+  document.getElementById('sc' + idx).innerHTML = renderSlotContent(b);
   const blkEl = document.getElementById('blk_' + blockId);
   if (blkEl) blkEl.classList.add('used');
-
   say(b.name, 1.0);
   updateProgress();
   dragItem = null;
@@ -311,21 +318,14 @@ function addToSlot(idx, blockId) {
 function removeFromSlot(idx) {
   const blockId = slots[idx];
   if (!blockId) return;
-
   slots[idx] = null;
-  document.getElementById('sc' + idx).innerHTML =
-    `<span style="font-size:28px;color:#ccc">?</span>`;
+  document.getElementById('sc' + idx).innerHTML = `<span style="font-size:26px;color:#ccc">?</span>`;
   document.querySelector(`.drop-slot[data-idx="${idx}"]`).className = 'drop-slot';
-
   const blkEl = document.getElementById('blk_' + blockId);
   if (blkEl) blkEl.classList.remove('used');
-
   updateProgress();
 }
 
-// ================================================
-// BARRA DE PROGRESSO
-// ================================================
 function updateProgress() {
   const pct = Math.round((slots.filter(s => s !== null).length / slots.length) * 100);
   document.getElementById('progressFill').style.width = pct + '%';
@@ -336,60 +336,29 @@ function updateProgress() {
 // ================================================
 function checkAnswer() {
   const ph = phases[currentPhase];
-
-  if (slots.includes(null)) {
-    showToast('⚠️ Complete a sequência antes!', 'err');
-    say('Complete todos os espaços primeiro!');
-    return;
-  }
-
-  const correct  = ph.sequence.every((id, i) => slots[i] === id);
-  const slotEls  = document.querySelectorAll('.drop-slot');
-
+  if (slots.includes(null)) { showToast('⚠️ Complete a sequência antes!', 'err'); say('Complete todos os espaços primeiro!'); return; }
+  const correct = ph.sequence.every((id, i) => slots[i] === id);
+  const slotEls = document.querySelectorAll('.drop-slot');
   if (correct) {
     slotEls.forEach(s => { s.classList.remove('wrong'); s.classList.add('correct'); });
-
     const msg = sayings.correct[Math.floor(Math.random() * sayings.correct.length)];
-    showToast('🎉 ' + msg, 'ok');
-    setChar(msg);
-    say(msg, 0.9);
-
-    // Pontuação: 20 pts menos 5 por dica usada (mínimo 5)
+    showToast('🎉 ' + msg, 'ok'); setChar(msg); say(msg, 0.9);
     const pts = Math.max(20 - hintCount * 5, 5);
     phaseScores[currentPhase] = pts;
     score = phaseScores.reduce((a, b) => a + b, 0);
     document.getElementById('scoreVal').textContent = score;
-
-    // Atualizar estrelas
     const total = phaseScores.filter(x => x > 0).length;
-    ['s1', 's2', 's3'].forEach((id, i) => {
-      document.getElementById(id).classList.toggle('on', i < Math.ceil(total / 2));
-    });
-
+    ['s1','s2','s3'].forEach((id, i) => document.getElementById(id).classList.toggle('on', i < Math.ceil(total / 2)));
     buildPhaseNav();
-
     setTimeout(() => {
-      if (currentPhase < phases.length - 1) {
-        currentPhase++;
-        initPhase();
-      } else {
-        showToast('🏆 Você completou todas as fases!', 'ok');
-        say('Parabéns! Você é incrível! Completou todas as missões!', 0.8);
-      }
+      if (currentPhase < phases.length - 1) { currentPhase++; initPhase(); }
+      else { showToast('🏆 Você completou todas as fases!', 'ok'); say('Parabéns! Você é incrível! Completou todas as missões!', 0.8); }
     }, 2000);
-
   } else {
-    slotEls.forEach((s, i) => {
-      s.classList.remove('correct', 'wrong');
-      s.classList.add(slots[i] === ph.sequence[i] ? 'correct' : 'wrong');
-    });
-
+    slotEls.forEach((s, i) => { s.classList.remove('correct','wrong'); s.classList.add(slots[i] === ph.sequence[i] ? 'correct' : 'wrong'); });
     const msg = sayings.wrong[Math.floor(Math.random() * sayings.wrong.length)];
-    showToast('❌ ' + msg, 'err');
-    setChar(msg);
-    say(msg, 0.9);
-
-    setTimeout(() => slotEls.forEach(s => s.classList.remove('wrong', 'correct')), 1400);
+    showToast('❌ ' + msg, 'err'); setChar(msg); say(msg, 0.9);
+    setTimeout(() => slotEls.forEach(s => s.classList.remove('wrong','correct')), 1400);
   }
 }
 
@@ -400,27 +369,13 @@ function showHint() {
   hintCount++;
   const ph = phases[currentPhase];
   const wrongIdx = ph.sequence.findIndex((id, i) => slots[i] !== id);
-
   if (wrongIdx === -1) { say('Você está indo bem!'); return; }
-
   const correct = ph.blocks.find(b => b.id === ph.sequence[wrongIdx]);
-  const hint    = `Na posição ${wrongIdx + 1}, vai o bloco: ${correct.name}`;
-
-  say(hint, 0.85);
-  showToast('💡 ' + hint, 'tip');
-  setChar(correct.name + ' ' + correct.icon);
+  const hint = `Na posição ${wrongIdx + 1}, vai o bloco: ${correct.name}`;
+  say(hint, 0.85); showToast('💡 ' + hint, 'tip'); setChar(correct.name + ' ' + correct.icon);
 }
 
-// ================================================
-// RECOMEÇAR FASE
-// ================================================
-function resetPhase() {
-  initPhase();
-  say('Vamos recomeçar!', 0.9);
-}
+function resetPhase() { initPhase(); say('Vamos recomeçar!', 0.9); }
 
-// ================================================
-// INICIALIZAR
-// ================================================
 window.speechSynthesis && window.speechSynthesis.getVoices();
 initPhase();
