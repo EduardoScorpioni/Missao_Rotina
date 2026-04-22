@@ -594,6 +594,147 @@ body.high-contrast .btn-speak-all { background: #003566; color: #fff; }
 .pc-btn-next.game-done { background: linear-gradient(135deg, var(--amar-dk) 0%, #E08000 100%); box-shadow: 0 6px 20px rgba(212,168,0,0.55); }
 
 /* ================================================
+   ANIMAÇÃO DE HISTÓRIA (slideshow pós-fase)
+   ================================================ */
+#storyOverlay {
+  position: fixed; inset: 0;
+  z-index: 11000;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+#storyOverlay.story-visible  { opacity: 1; pointer-events: all; }
+#storyOverlay.story-fade-out { opacity: 0; pointer-events: none; }
+
+/* Fundo desfocado com a imagem atual */
+.story-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  filter: blur(22px) brightness(0.45) saturate(1.4);
+  transform: scale(1.08);
+  transition: background-image 0.35s ease;
+}
+
+/* Card central */
+.story-frame {
+  position: relative; z-index: 2;
+  background: #fff;
+  border-radius: 28px;
+  padding: 18px 18px 14px;
+  width: min(88vw, 420px);
+  box-shadow: 0 28px 72px rgba(0,0,0,0.55), 0 0 0 4px rgba(255,255,255,0.18);
+  cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  /* estado inicial invisível até animação */
+}
+
+.story-img-wrap {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #f0f0f0;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.22);
+}
+.story-img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.25s;
+}
+
+.story-label {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(16px, 4vw, 22px);
+  font-weight: 900;
+  color: #333;
+  text-align: center;
+  line-height: 1.3;
+  padding: 0 6px;
+}
+.story-step-num {
+  display: inline-block;
+  background: var(--roxo);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  border-radius: 20px;
+  padding: 2px 9px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Dots */
+.story-step-dots {
+  display: flex; gap: 7px; align-items: center;
+}
+.story-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: #ddd;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+.story-dot.active {
+  background: var(--roxo);
+  transform: scale(1.45);
+  box-shadow: 0 0 0 3px rgba(174,90,191,0.25);
+}
+
+/* Seta direita (hint de clique) */
+.story-arrow {
+  position: absolute;
+  right: 14px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px; color: rgba(174,90,191,0.55);
+  animation: story-arrow-pulse 1.2s infinite alternate;
+  pointer-events: none;
+}
+@keyframes story-arrow-pulse {
+  from { opacity: 0.4; transform: translateY(-50%) translateX(0); }
+  to   { opacity: 1;   transform: translateY(-50%) translateX(5px); }
+}
+
+/* Botão pular */
+.story-skip-btn {
+  position: absolute; bottom: 28px; right: 28px;
+  z-index: 3;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px; font-weight: 900;
+  background: rgba(255,255,255,0.18);
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 22px;
+  padding: 7px 18px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: all 0.2s;
+  letter-spacing: 0.4px;
+}
+.story-skip-btn:hover { background: rgba(255,255,255,0.32); transform: scale(1.06); }
+
+/* Transições de slide */
+.story-frame {
+  transition: transform 0.22s cubic-bezier(0.4,0,0.2,1), opacity 0.22s ease;
+}
+.story-exit-left  { transform: translateX(-60px) scale(0.93); opacity: 0; }
+.story-exit-right { transform: translateX( 60px) scale(0.93); opacity: 0; }
+.story-enter-left  {
+  animation: slide-from-left  0.28s cubic-bezier(0.34,1.3,0.64,1) both;
+}
+.story-enter-right {
+  animation: slide-from-right 0.28s cubic-bezier(0.34,1.3,0.64,1) both;
+}
+@keyframes slide-from-right {
+  from { transform: translateX(70px) scale(0.92); opacity: 0; }
+  to   { transform: translateX(0)    scale(1);    opacity: 1; }
+}
+@keyframes slide-from-left {
+  from { transform: translateX(-70px) scale(0.92); opacity: 0; }
+  to   { transform: translateX(0)     scale(1);    opacity: 1; }
+}
+
+/* ================================================
    ACESSIBILIDADE — FOCO VISÍVEL (WCAG 2.1 AA)
    ================================================ */
 *:focus { outline: none; }

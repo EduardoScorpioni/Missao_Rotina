@@ -277,6 +277,117 @@ function updateHeaderStars() {
 }
 
 // ================================================
+// ANIMAÇÃO DE HISTÓRIA — slideshow das imagens da sequência
+// ================================================
+function playStoryAnimation(ph, onDone) {
+  // Filtra apenas blocos que têm imagem, na ordem correta da sequência
+  const storyBlocks = ph.sequence
+    .map(id => ph.blocks.find(b => b.id === id))
+    .filter(b => b && b.img);
+
+  // Se não há imagens suficientes, pula a animação
+  if (storyBlocks.length < 2) { onDone(); return; }
+
+  // Cria overlay
+  const overlay = document.createElement('div');
+  overlay.id = 'storyOverlay';
+  overlay.setAttribute('role', 'presentation');
+  overlay.setAttribute('aria-hidden', 'true');
+  overlay.innerHTML = `
+    <div class="story-bg" id="storyBg"></div>
+    <div class="story-frame" id="storyFrame">
+      <div class="story-img-wrap" id="storyImgWrap">
+        <img id="storyImg" src="" alt="" />
+      </div>
+      <div class="story-label" id="storyLabel"></div>
+      <div class="story-step-dots" id="storyDots"></div>
+      <div class="story-arrow story-arrow-right" id="storyArrow">▶</div>
+    </div>
+    <div class="story-skip-btn" id="storySkip">Pular ⏭</div>
+  `;
+  document.body.appendChild(overlay);
+
+  // Dots de progresso
+  const dotsEl = document.getElementById('storyDots');
+  storyBlocks.forEach((_, i) => {
+    const d = document.createElement('span');
+    d.className = 'story-dot' + (i === 0 ? ' active' : '');
+    dotsEl.appendChild(d);
+  });
+
+  let current = 0;
+  let autoTimer = null;
+
+  function goTo(idx, dir = 'next') {
+    if (idx >= storyBlocks.length) { finish(); return; }
+    const b = storyBlocks[idx];
+    const frame  = document.getElementById('storyFrame');
+    const img    = document.getElementById('storyImg');
+    const label  = document.getElementById('storyLabel');
+    const bg     = document.getElementById('storyBg');
+    const dots   = document.querySelectorAll('.story-dot');
+
+    // Animação de saída
+    frame.classList.remove('story-enter-left','story-enter-right');
+    frame.classList.add(dir === 'next' ? 'story-exit-left' : 'story-exit-right');
+
+    setTimeout(() => {
+      img.src = IMG + b.img;
+      img.alt = b.name;
+      label.innerHTML = `<span class="story-step-num">${idx + 1}/${storyBlocks.length}</span> ${b.icon} ${b.name}`;
+      bg.style.backgroundImage = `url(${IMG + b.img})`;
+
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+
+      frame.classList.remove('story-exit-left','story-exit-right');
+      frame.classList.add(dir === 'next' ? 'story-enter-right' : 'story-enter-left');
+    }, 220);
+
+    current = idx;
+
+    // Fala o nome do bloco
+    say(b.name, 1.0);
+
+    // Auto-avança após 2.2s
+    clearTimeout(autoTimer);
+    autoTimer = setTimeout(() => goTo(current + 1, 'next'), 2200);
+  }
+
+  function finish() {
+    clearTimeout(autoTimer);
+    overlay.classList.add('story-fade-out');
+    setTimeout(() => {
+      overlay.remove();
+      onDone();
+    }, 450);
+  }
+
+  // Clique na frame / seta avança
+  document.getElementById('storyFrame').addEventListener('click', () => {
+    clearTimeout(autoTimer);
+    goTo(current + 1, 'next');
+  });
+  document.getElementById('storySkip').addEventListener('click', (e) => {
+    e.stopPropagation();
+    finish();
+  });
+
+  // Inicia
+  overlay.classList.add('story-visible');
+  const firstB = storyBlocks[0];
+  const img    = document.getElementById('storyImg');
+  const label  = document.getElementById('storyLabel');
+  const bg     = document.getElementById('storyBg');
+  img.src    = IMG + firstB.img;
+  img.alt    = firstB.name;
+  label.innerHTML = `<span class="story-step-num">1/${storyBlocks.length}</span> ${firstB.icon} ${firstB.name}`;
+  bg.style.backgroundImage = `url(${IMG + firstB.img})`;
+  document.getElementById('storyFrame').classList.add('story-enter-right');
+  say(firstB.name, 1.0);
+  autoTimer = setTimeout(() => goTo(1, 'next'), 2200);
+}
+
+// ================================================
 // TELA DE CONCLUSÃO DE FASE
 // ================================================
 function showPhaseComplete(result, ph, isLastPhase) {
@@ -654,7 +765,9 @@ function checkAnswer() {
     buildPhaseNav();
 
     setTimeout(() => {
-      showPhaseComplete(result, ph, currentPhase === phases.length - 1);
+      playStoryAnimation(ph, () => {
+        showPhaseComplete(result, ph, currentPhase === phases.length - 1);
+      });
     }, 900);
 
   } else {
