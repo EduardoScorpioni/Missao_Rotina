@@ -26,11 +26,11 @@
     "desc": "Organize as etapas para fazer sua lição",
     "mission": "Hora da lição! Organize as etapas para fazer a tarefa de casa.",
     "blocks": [
-      { "id": "am", "name": "Arrumar o material",  "icon": "📦", "img": "" },
-      { "id": "om", "name": "Organizar a mesa",     "icon": "🪑", "img": "" },
-      { "id": "ac", "name": "Abrir o caderno",      "icon": "📖", "img": "" },
-      { "id": "ra", "name": "Resolver a atividade", "icon": "✏️", "img": "" },
-      { "id": "ft", "name": "Finalizar a tarefa",   "icon": "✅", "img": "" },
+      { "id": "am", "name": "Arrumar o material",  "icon": "📦", "img": "Organizando os materiais escolares.png" },
+      { "id": "om", "name": "Organizar a mesa",     "icon": "🪑", "img": "Criança arrumando sua mesa de estudos.png" },
+      { "id": "ac", "name": "Abrir o caderno",      "icon": "📖", "img": "Menino abrindo o caderno.png" },
+      { "id": "ra", "name": "Resolver a atividade", "icon": "✏️", "img": "Garoto fazendo lição de matemática.png" },
+      { "id": "ft", "name": "Finalizar a tarefa",   "icon": "✅", "img": "Menino finalizando a lição.png" },
       { "id": "gm", "name": "Guardar os materiais", "icon": "🎒", "img": "" }
     ],
     "sequence": ["am", "om", "ac", "ra", "ft", "gm"]
@@ -44,12 +44,12 @@
     "desc": "Organize o momento de brincar e guardar os brinquedos",
     "mission": "Vamos brincar! Mas primeiro organize as etapas certinho.",
     "blocks": [
-      { "id": "pb", "name": "Pegar a caixa",        "icon": "📦", "img": "" },
-      { "id": "cb", "name": "Escolher brinquedos",  "icon": "🧸", "img": "" },
-      { "id": "br", "name": "Brincar",              "icon": "🎮", "img": "" },
-      { "id": "db", "name": "Dividir com amigos",   "icon": "🤝", "img": "" },
-      { "id": "ob", "name": "Organizar brinquedos", "icon": "🗂️", "img": "" },
-      { "id": "gb", "name": "Guardar na caixa",     "icon": "📫", "img": "" }
+      { "id": "pb", "name": "Pegar a caixa",        "icon": "📦", "img": "arrumando_caixa.png" },
+      { "id": "cb", "name": "Escolher brinquedos",  "icon": "🧸", "img": "escolhendo_brinquedo.png" },
+      { "id": "br", "name": "Brincar",              "icon": "🎮", "img": "brincando.png" },
+      { "id": "db", "name": "Dividir com amigos",   "icon": "🤝", "img": "dividindo.png" },
+      { "id": "ob", "name": "Organizar brinquedos", "icon": "🗂️", "img": "organizando.png" },
+      { "id": "gb", "name": "Guardar na caixa",     "icon": "📫", "img": "guardando.png" }
     ],
     "sequence": ["pb", "cb", "br", "db", "ob", "gb"]
   },
@@ -62,14 +62,14 @@
     "desc": "Monte seu sanduíche passo a passo",
     "mission": "Que fome! Vamos fazer um sanduíche gostoso. Siga a sequência!",
     "blocks": [
-      { "id": "ic",  "name": "Ir à cozinha",         "icon": "🚶", "img": "" },
-      { "id": "si",  "name": "Separar ingredientes",  "icon": "🥗", "img": "" },
-      { "id": "pp",  "name": "Pegar um prato",        "icon": "🍽️", "img": "" },
-      { "id": "pa",  "name": "Pegar o pão",           "icon": "🍞", "img": "" },
-      { "id": "cp",  "name": "Pão no prato",          "icon": "🥖", "img": "" },
-      { "id": "mon", "name": "Montar o sanduíche",    "icon": "🥪", "img": "" },
-      { "id": "sm",  "name": "Sentar à mesa",         "icon": "🪑", "img": "" },
-      { "id": "co",  "name": "Comer o lanche",        "icon": "😋", "img": "" }
+      { "id": "ic",  "name": "Ir à cozinha",         "icon": "🚶", "img": "indo_cozinha.png" },
+      { "id": "si",  "name": "Separar ingredientes",  "icon": "🥗", "img": "separando_ingredientes.png" },
+      { "id": "pp",  "name": "Pegar um prato",        "icon": "🍽️", "img": "pegando_prato.png" },
+      { "id": "pa",  "name": "Pegar o pão",           "icon": "🍞", "img": "pegando_pao.png" },
+      { "id": "cp",  "name": "Pão no prato",          "icon": "🥖", "img": "pao_no_prato.png" },
+      { "id": "mon", "name": "Montar o sanduíche",    "icon": "🥪", "img": "montando_pao.png" },
+      { "id": "sm",  "name": "Sentar à mesa",         "icon": "🪑", "img": "sentando_mesa.png" },
+      { "id": "co",  "name": "Comer o lanche",        "icon": "😋", "img": "comendo_pao.png" }
     ],
     "sequence": ["ic", "si", "pp", "pa", "cp", "mon", "sm", "co"]
   },
