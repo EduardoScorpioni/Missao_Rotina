@@ -1,0 +1,93 @@
+[
+  {
+    "id": 1,
+    "icon": "🌅",
+    "title": "Começar o Dia!",
+    "bg": "linear-gradient(135deg,#84E6F8,#3EC8E8)",
+    "pbColor": "#0AACCC",
+    "desc": "Arraste os blocos na ordem certa para ir à escola",
+    "mission": "Hora de começar o dia! Coloque as ações na ordem correta para ir à escola.",
+    "blocks": [
+      { "id": "lb", "name": "Levantar da cama",  "icon": "🛏️", "img": "Fundo.png" },
+      { "id": "ab", "name": "Arrumar a cama",    "icon": "🛋️", "img": "Designer.png" },
+      { "id": "tr", "name": "Trocar de roupa",   "icon": "👕", "img": "Designer (1).png" },
+      { "id": "es", "name": "Escovar os dentes", "icon": "🪥", "img": "Designer (2).png" },
+      { "id": "mo", "name": "Arrumar a mochila", "icon": "🎒", "img": "Designer (4).png" },
+      { "id": "ir", "name": "Ir para a escola",  "icon": "🏫", "img": "Designer (5).png" }
+    ],
+    "sequence": ["lb", "ab", "tr", "es", "mo", "ir"]
+  },
+  {
+    "id": 2,
+    "icon": "📚",
+    "title": "Tarefa de Casa!",
+    "bg": "linear-gradient(135deg,#B0E3AC,#5BB751)",
+    "pbColor": "#3A8C32",
+    "desc": "Organize as etapas para fazer sua lição",
+    "mission": "Hora da lição! Organize as etapas para fazer a tarefa de casa.",
+    "blocks": [
+      { "id": "am", "name": "Arrumar o material",  "icon": "📦", "img": "" },
+      { "id": "om", "name": "Organizar a mesa",     "icon": "🪑", "img": "" },
+      { "id": "ac", "name": "Abrir o caderno",      "icon": "📖", "img": "" },
+      { "id": "ra", "name": "Resolver a atividade", "icon": "✏️", "img": "" },
+      { "id": "ft", "name": "Finalizar a tarefa",   "icon": "✅", "img": "" },
+      { "id": "gm", "name": "Guardar os materiais", "icon": "🎒", "img": "" }
+    ],
+    "sequence": ["am", "om", "ac", "ra", "ft", "gm"]
+  },
+  {
+    "id": 3,
+    "icon": "🎮",
+    "title": "Hora de Brincar!",
+    "bg": "linear-gradient(135deg,#F29CA3,#E06070)",
+    "pbColor": "#C62A2A",
+    "desc": "Organize o momento de brincar e guardar os brinquedos",
+    "mission": "Vamos brincar! Mas primeiro organize as etapas certinho.",
+    "blocks": [
+      { "id": "pb", "name": "Pegar a caixa",        "icon": "📦", "img": "" },
+      { "id": "cb", "name": "Escolher brinquedos",  "icon": "🧸", "img": "" },
+      { "id": "br", "name": "Brincar",              "icon": "🎮", "img": "" },
+      { "id": "db", "name": "Dividir com amigos",   "icon": "🤝", "img": "" },
+      { "id": "ob", "name": "Organizar brinquedos", "icon": "🗂️", "img": "" },
+      { "id": "gb", "name": "Guardar na caixa",     "icon": "📫", "img": "" }
+    ],
+    "sequence": ["pb", "cb", "br", "db", "ob", "gb"]
+  },
+  {
+    "id": 4,
+    "icon": "🥪",
+    "title": "Hora do Lanche!",
+    "bg": "linear-gradient(135deg,#F9E784,#F0C800)",
+    "pbColor": "#D4A800",
+    "desc": "Monte seu sanduíche passo a passo",
+    "mission": "Que fome! Vamos fazer um sanduíche gostoso. Siga a sequência!",
+    "blocks": [
+      { "id": "ic",  "name": "Ir à cozinha",         "icon": "🚶", "img": "" },
+      { "id": "si",  "name": "Separar ingredientes",  "icon": "🥗", "img": "" },
+      { "id": "pp",  "name": "Pegar um prato",        "icon": "🍽️", "img": "" },
+      { "id": "pa",  "name": "Pegar o pão",           "icon": "🍞", "img": "" },
+      { "id": "cp",  "name": "Pão no prato",          "icon": "🥖", "img": "" },
+      { "id": "mon", "name": "Montar o sanduíche",    "icon": "🥪", "img": "" },
+      { "id": "sm",  "name": "Sentar à mesa",         "icon": "🪑", "img": "" },
+      { "id": "co",  "name": "Comer o lanche",        "icon": "😋", "img": "" }
+    ],
+    "sequence": ["ic", "si", "pp", "pa", "cp", "mon", "sm", "co"]
+  },
+  {
+    "id": 5,
+    "icon": "💻",
+    "title": "Usando o Computador!",
+    "bg": "linear-gradient(135deg,#D8A8E8,#AE5ABF)",
+    "pbColor": "#7B2FA0",
+    "desc": "Organize os passos para usar o computador certinho",
+    "mission": "Vamos usar o computador! Coloque os passos na ordem certa.",
+    "blocks": [
+      { "id": "lc", "name": "Ligar o computador", "icon": "🔌", "img": "" },
+      { "id": "ap", "name": "Abrir um programa",  "icon": "📂", "img": "" },
+      { "id": "dt", "name": "Digitar um texto",   "icon": "⌨️", "img": "" },
+      { "id": "st", "name": "Salvar o trabalho",  "icon": "💾", "img": "" },
+      { "id": "fp", "name": "Fechar o programa",  "icon": "❎", "img": "" }
+    ],
+    "sequence": ["lc", "ap", "dt", "st", "fp"]
+  }
+]

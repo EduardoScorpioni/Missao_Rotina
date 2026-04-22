@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Debuguinho</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <a href="#blockList" class="skip-link">Pular para os blocos</a>
+
+  <div class="feedback-toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true"></div>
+
+  <!-- TELA DE CONCLUSÃO DE FASE -->
+  <div class="phase-complete-overlay" id="phaseCompleteOverlay" role="dialog" aria-modal="true" aria-labelledby="pcTitle" aria-describedby="pcScoreLine">
+    <div class="phase-complete-card">
+      <div class="pc-phase-icon" id="pcPhaseIcon">🌅</div>
+      <h2 class="pc-title" id="pcTitle">Fase Concluída!</h2>
+      <div class="pc-stars-wrap" id="pcStarsWrap"></div>
+      <div class="pc-score-line" id="pcScoreLine">+20 pontos</div>
+      <div class="pc-details" id="pcDetails"></div>
+      <button class="pc-btn-next" id="pcBtnNext" onclick="advancePhase()">
+        Próxima Fase ➡️
+      </button>
+    </div>
+  </div>
+
+  <div class="game-root">
+
+    <!-- HEADER -->
+    <header class="header" role="banner">
+      <div class="logo-area">
+        <div class="logo-icon" aria-hidden="true">🚀</div>
+        <div class="logo-text">
+          <h1>Debuguinho</h1>
+          <p>Aprenda sequências</p>
+        </div>
+      </div>
+      <div class="score-box" role="status" aria-label="Placar do jogo">
+        <div class="label">Pontos</div>
+        <div class="value" id="scoreVal" aria-live="polite" aria-atomic="true" aria-label="Pontuação total: 0 pontos">0</div>
+        <div class="phase-scores-row" id="phaseScoresRow"></div>
+      </div>
+    </header>
+
+    <!-- BARRA DE CONTROLES: dificuldade + áudio + acessibilidade -->
+    <div class="top-controls-bar" role="toolbar" aria-label="Controles do jogo">
+
+      <!-- Dificuldade -->
+      <label for="difficultySelect">🎯 Dificuldade:</label>
+      <select id="difficultySelect" class="difficulty-select"
+              aria-label="Selecionar nível de dificuldade"
+              title="Fácil: blocos ordenados e sem penalidade extra | Médio: padrão | Difícil: sem dicas e penalidades maiores">
+      </select>
+
+      <div class="top-controls-sep" aria-hidden="true"></div>
+
+      <!-- Controle de áudio -->
+      <button id="btnMute" class="btn-icon-ctrl"
+              onclick="toggleMute()"
+              aria-label="Silenciar áudio"
+              aria-pressed="false"
+              aria-keyshortcuts="M"
+              title="Silenciar / Ativar áudio (M)">
+        🔊
+      </button>
+
+      <div class="volume-wrap">
+        <label for="volumeSlider" class="sr-only">Volume</label>
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="1"
+               oninput="setVolume(this.value)"
+               aria-label="Volume do áudio"
+               aria-valuemin="0" aria-valuemax="1" aria-valuenow="1" />
+      </div>
+
+      <div class="top-controls-sep" aria-hidden="true"></div>
+
+      <!-- Acessibilidade -->
+      <div class="a11y-panel-wrap">
+        <button id="btnA11y" class="btn-icon-ctrl"
+                onclick="toggleA11yPanel()"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="a11yPanel"
+                aria-label="Abrir configurações de acessibilidade"
+                aria-keyshortcuts="A"
+                title="Acessibilidade (A)">
+          ♿ Acessibilidade
+        </button>
+
+        <div id="a11yPanel" class="a11y-panel" role="region" aria-label="Configurações de acessibilidade">
+          <div class="a11y-panel-title">⚙️ Acessibilidade</div>
+
+          <button id="btnHighContrast"
+                  onclick="toggleHighContrast()"
+                  aria-pressed="false"
+                  aria-label="Ativar ou desativar alto contraste">
+            🌓 Alto Contraste
+          </button>
+
+          <button id="btnFontSize"
+                  onclick="cycleFontSize()"
+                  aria-label="Aumentar tamanho de fonte">
+            🔤 Texto Normal
+          </button>
+
+          <div class="a11y-shortcuts" aria-label="Atalhos de teclado disponíveis">
+            <strong>Atalhos de teclado:</strong><br>
+            <b>V</b> — Verificar sequência<br>
+            <b>D</b> — Pedir dica<br>
+            <b>R</b> — Recomeçar fase<br>
+            <b>O</b> — Ouvir sequência<br>
+            <b>M</b> — Silenciar áudio<br>
+            <b>A</b> — Acessibilidade<br>
+            <b>Esc</b> — Fechar painel
+          </div>
+        </div>
+      </div>
+
+      <span class="keyboard-hint" aria-hidden="true">V=Verificar · D=Dica · R=Recomeçar · M=Mudo</span>
+    </div>
+
+    <nav class="phase-nav" id="phaseNav" role="navigation" aria-label="Navegação de fases"></nav>
+
+    <!-- JOGO -->
+    <main class="game-area" role="main">
+
+      <!-- Painel esquerdo: botões de ação -->
+      <div class="left-panel actions-panel" role="complementary" aria-label="Controles do jogo">
+        <div class="char-wrap char-wrap-vertical" aria-hidden="true">
+          <div class="char">🧒</div>
+          <div class="char-speech char-speech-vertical" id="charSpeech">Vamos lá!</div>
+        </div>
+        <button class="btn-action btn-check"
+                onclick="checkAnswer()"
+                aria-label="Verificar sequência"
+                aria-keyshortcuts="V"
+                title="Verificar (V)">
+          ✅ Verificar!
+        </button>
+        <button class="btn-action btn-speak-all"
+                onclick="speakSequence()"
+                aria-label="Ouvir sequência atual"
+                aria-keyshortcuts="O"
+                title="Ouvir (O)">
+          🎧 Ouvir
+        </button>
+        <button class="btn-action btn-hint"
+                onclick="showHint()"
+                aria-label="Pedir uma dica"
+                aria-keyshortcuts="D"
+                title="Dica (D)">
+          💡 Dica
+        </button>
+        <button class="btn-action btn-reset"
+                onclick="resetPhase()"
+                aria-label="Recomeçar esta fase"
+                aria-keyshortcuts="R"
+                title="Recomeçar (R)">
+          🔄 Recomeçar
+        </button>
+      </div>
+
+      <!-- Painel direito: missão + sequência -->
+      <section class="right-panel" aria-labelledby="missionTitle">
+        <div class="mission-header" id="missionHeader">
+          <div class="big-icon" id="missionIcon" aria-hidden="true">🌅</div>
+          <div style="flex:1">
+            <h2 id="missionTitle">Fase 1 — Começar o Dia!</h2>
+            <p id="missionDesc">Arraste os blocos na ordem certa para ir à escola</p>
+            <div class="progress-bar-wrap"
+                 role="progressbar"
+                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+                 aria-label="Progresso da sequência"
+                 id="progressBar">
+              <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+            </div>
+          </div>
+          <button class="speak-btn" id="speakMissionBtn"
+                  onclick="speakMission()"
+                  aria-label="Ouvir a missão em voz alta">
+            🔊
+          </button>
+        </div>
+
+        <div class="seq-title" aria-hidden="true">📋 Monte a sequência:</div>
+        <div class="drop-zone" id="dropZone"
+             role="list"
+             aria-label="Sequência de atividades — arraste ou clique nos blocos para preencher">
+        </div>
+      </section>
+
+    </main>
+
+    <!-- PAINEL INFERIOR: blocos -->
+    <section class="bottom-blocks-panel" aria-label="Blocos disponíveis">
+      <div class="panel-title" aria-hidden="true">🎴 Blocos</div>
+      <div id="blockList" role="list" aria-label="Blocos para montar a sequência"></div>
+    </section>
+
+  </div>
+
+  <script src="assets/js/game.js"></script>
+</body>
+</html>
