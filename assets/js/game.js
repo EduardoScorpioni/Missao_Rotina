@@ -9,18 +9,20 @@
 const IMG = 'assets/img/';
 
 // ================================================
-// DADOS DAS FASES (carregados externamente via JSON)
+// DADOS DAS FASES (carregados externamente via JSON, com fallback para abrir por pasta)
 // ================================================
 let phases = [];
 
 async function loadPhases() {
   try {
-    const res = await fetch('assets/data/phases.json');
+    const res = await fetch('assets/data/phases.json?v=20260525-0955', { cache: 'no-store' });
     phases = await res.json();
-    initPhase();
   } catch (e) {
     console.error('Erro ao carregar fases:', e);
+    phases = Array.isArray(window.DEBUGUINHO_PHASES) ? window.DEBUGUINHO_PHASES : [];
   }
+
+  if (phases.length) initPhase();
 }
 
 // ================================================

@@ -1,4 +1,4 @@
-[
+window.DEBUGUINHO_PHASES = [
   {
     "id": 1,
     "icon": "🌅",
@@ -1024,4 +1024,4 @@
       }
     ]
   }
-]
+];
