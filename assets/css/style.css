@@ -38,8 +38,9 @@ body {
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
-  padding: 20px;
+  padding: clamp(8px, 4vw, 20px);
   font-size: calc(14px * var(--font-scale));
+  overflow-x: hidden;
 }
 
 .game-root {
@@ -1231,13 +1232,81 @@ body.high-contrast .tutorial-close {
 
 /* ================================================
    RESPONSIVO
+   O visual continua o mesmo em qualquer tamanho de
+   tela — só o layout se reorganiza para caber bem.
+   Faixas: desktop (regras acima) > tablet > celular
+   > celular pequeno > celular muito pequeno.
    ================================================ */
+
+/* ---------- TABLET (até 1024px) ---------- */
+@media (max-width: 1024px) {
+  body { padding: 14px; }
+  .header { flex-wrap: wrap; gap: 10px; }
+  .phase-nav { -webkit-overflow-scrolling: touch; }
+}
+
+/* ---------- CELULARES (até 640px) ---------- */
 @media (max-width: 640px) {
+  body { padding: 8px; }
+  .header {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+  }
+  .logo-area { justify-content: center; }
   .game-area { flex-direction: column; height: auto; }
-  .left-panel { width: 100%; flex-direction: row; flex-wrap: wrap; justify-content: center; border-right: none; border-bottom: 3px dashed var(--roxo-lt); }
+  .left-panel {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    border-right: none;
+    border-bottom: 3px dashed var(--roxo-lt);
+  }
   .left-panel .char-wrap-vertical { display: none; }
   .drop-zone { grid-template-columns: repeat(2, 1fr); }
-  .score-rules-panel { grid-template-columns: 1fr; }
+  .score-rules-panel { grid-template-columns: 1fr; margin-left: 8px; margin-right: 8px; }
   .top-controls-bar { gap: 8px; }
   .keyboard-hint { display: none; }
+  .mission-header { flex-wrap: wrap; }
+  .right-panel { padding: 12px 10px; }
+  .feedback-toast {
+    white-space: normal;
+    max-width: calc(100vw - 32px);
+    text-align: center;
+  }
+  .a11y-panel {
+    right: -8px;
+    max-width: calc(100vw - 24px);
+  }
+  .phase-complete-card { padding: 28px 20px 24px; }
+  .tutorial-card { padding: 18px; }
+}
+
+/* ---------- CELULARES PEQUENOS (até 480px) ---------- */
+@media (max-width: 480px) {
+  .logo-text h1 { font-size: calc(20px * var(--font-scale)); }
+  .logo-icon { font-size: 30px; }
+  .score-box { padding: 6px 14px; }
+  .score-box .value { font-size: calc(22px * var(--font-scale)); }
+  .phase-btn { padding: 6px 12px; }
+  .pc-title { font-size: calc(22px * var(--font-scale)); }
+  .pc-score-line { font-size: calc(18px * var(--font-scale)); }
+  .tutorial-card h2 { font-size: calc(20px * var(--font-scale)); }
+}
+
+/* ---------- CELULARES MUITO PEQUENOS (até 360px) ---------- */
+@media (max-width: 360px) {
+  .drop-zone { grid-template-columns: 1fr; }
+  .score-box { padding: 5px 10px; }
+  .score-box .value { font-size: calc(19px * var(--font-scale)); }
+  .bottom-blocks-panel #blockList { justify-content: center; }
+}
+
+/* ---------- TELAS DE TOQUE: garante alvo mínimo de 44px ---------- */
+@media (hover: none) and (pointer: coarse) {
+  .btn-action { min-height: 44px; }
+  .speak-btn { width: 48px; height: 48px; }
+  .phase-btn { min-height: 40px; }
 }

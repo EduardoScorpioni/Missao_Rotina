@@ -9,10 +9,10 @@
 </head>
 <body>
 
-  <!-- Filtros SVG para simulação de daltonismo (ocultos visualmente) -->
+  <!-- Filtros de daltonismo -->
   <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
     <defs>
-      <!-- Deuteranopia: dificuldade verde-vermelho -->
+      <!-- Deuteranopia -->
       <filter id="filter-deuteranopia" color-interpolation-filters="linearRGB">
         <feColorMatrix type="matrix" values="
           0.625 0.375 0     0 0
@@ -20,7 +20,7 @@
           0     0.3   0.7   0 0
           0     0     0     1 0"/>
       </filter>
-      <!-- Protanopia: ausência do vermelho -->
+      <!-- Protanopia -->
       <filter id="filter-protanopia" color-interpolation-filters="linearRGB">
         <feColorMatrix type="matrix" values="
           0.567 0.433 0     0 0
@@ -28,7 +28,7 @@
           0     0.242 0.758 0 0
           0     0     0     1 0"/>
       </filter>
-      <!-- Tritanopia: dificuldade azul-amarelo -->
+      <!-- Tritanopia -->
       <filter id="filter-tritanopia" color-interpolation-filters="linearRGB">
         <feColorMatrix type="matrix" values="
           0.95  0.05  0     0 0
@@ -82,7 +82,7 @@
 
   <div class="game-root">
 
-    <!-- HEADER -->
+    <!-- Cabeçalho -->
     <header class="header" role="banner">
       <div class="logo-area">
         <div class="logo-icon" aria-hidden="true">🚀</div>
@@ -98,10 +98,10 @@
       </div>
     </header>
 
-    <!-- BARRA DE CONTROLES: dificuldade + áudio + acessibilidade -->
+    <!-- Controles -->
     <div class="top-controls-bar" role="toolbar" aria-label="Controles do jogo">
 
-      <!-- Controle de áudio -->
+      <!-- Áudio -->
       <button id="btnMute" class="btn-icon-ctrl"
               onclick="toggleMute()"
               aria-label="Silenciar áudio"
@@ -235,7 +235,7 @@
       </p>
       <div class="sr-only" id="gameStatus" aria-live="polite" aria-atomic="true"></div>
 
-      <!-- Painel esquerdo: botões de ação -->
+      <!-- Ações -->
       <div class="left-panel actions-panel" role="complementary" aria-label="Controles do jogo">
         <div class="char-wrap char-wrap-vertical" aria-hidden="true">
           <div class="char">🧒</div>
@@ -271,7 +271,7 @@
         </button>
       </div>
 
-      <!-- Painel direito: missão + sequência -->
+      <!-- Missão e sequência -->
       <section class="right-panel" aria-labelledby="missionTitle">
         <div class="mission-header" id="missionHeader">
           <div class="big-icon" id="missionIcon" aria-hidden="true">🌅</div>
@@ -303,7 +303,7 @@
 
     </main>
 
-    <!-- PAINEL INFERIOR: blocos -->
+    <!-- Blocos -->
     <section class="bottom-blocks-panel" aria-label="Blocos disponíveis">
       <div class="panel-title" aria-hidden="true">🎴 Blocos</div>
       <div id="blockList" role="group" aria-label="Blocos disponíveis para montar a sequência" aria-describedby="gameInstructions"></div>
